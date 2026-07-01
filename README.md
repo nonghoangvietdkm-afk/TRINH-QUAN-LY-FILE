@@ -9,6 +9,13 @@
 * **Bối cảnh bài toán:** Trong các hệ điều hành thực tế (như Windows, Linux), hệ thống file luôn được tổ chức theo **mô hình cây phân cấp**. Việc quản lý hàng triệu tập tin yêu cầu các thao tác như tìm kiếm, điều hướng và thêm/xóa phải diễn ra với **tốc độ tối ưu** và **tốn ít tài nguyên** nhất.
 * **Mục tiêu của ứng dụng:** Dự án này được viết ra nhằm tái hiện lại cách thức hoạt động của một hệ điều hành thu nhỏ. Điểm đặc biệt là ứng dụng **hoàn toàn tự xây dựng (tự code tay) các cấu trúc dữ liệu nền tảng** mà không dựa dẫm vào bất kỳ thư viện container có sẵn nào của C++ (như `std::vector`, `std::stack`, `std::queue`). Qua đó, giúp tối ưu hóa **hiệu năng xử lý** tại từng nút (Node) trong hệ thống.
 
+Cấu trúc dữ liệu sử dụng
+
+Cây tổng quát: Lưu quan hệ cha - con giữa các thư mục và tệp tin.  
+
+Hai ngăn xếp: Dùng để lưu lịch sử nhằm thực hiện tính năng Lùi (Back) và Tiến (Forward) thư mục.  
+
+Một hàng đợi: Phục vụ riêng cho tính năng Tìm kiếm.
 ---
 
 ## 🛠️ 2. Phân Tích Logic Cấu Trúc Dữ Liệu & Thuật Toán
