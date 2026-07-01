@@ -1,4 +1,4 @@
-# 📁 Giới Thiệu Dự Án: Mini File Explorer (CLI)
+# 📁 Giới Thiệu Dự Án: TRÌNH QUẢN LÝ FILE
 
 ---
 
