@@ -23,9 +23,14 @@ Test cases
 Mô tả 5 test case chính tự động trong file test.cpp:
 
 Test 1: Tạo các thư mục (docs, images) và file (notes.txt), sau đó gọi lệnh ls để kiểm tra tính chính xác của cấu trúc Linked List trong thư mục hiện tại.
+
 Test 2: Di chuyển sâu vào cây thư mục bằng lệnh cd và in đường dẫn tuyệt đối bằng pwd để xác thực liên kết con trỏ parent.
+
 Test 3: Kiểm tra tính chính xác của Stack lịch sử bằng cách thực hiện chuỗi thao tác điều hướng và kiểm tra trạng thái khi gọi back() và forward().
+
 Test 4: Sử dụng thuật toán tìm kiếm BFS (Queue) để quét tìm một file nằm ẩn sâu trong hệ thống, đồng thời tính tổng dung lượng thư mục bằng Post-order traversal.
+
 Test 5: Kiểm tra tính năng I/O bằng cách xuất cấu trúc cây ra file test_tree.txt, giải phóng bộ nhớ cây cũ, sau đó nạp lại dữ liệu từ file để khôi phục nguyên vẹn cấu trúc cây ban đầu.
+
 Cấu trúc file
 src/ main.cpp — Menu và điều khiển structures.h — Khai báo struct + nguyên mẫu hàm functions.cpp — Cài đặt chi tiết tests/ test.cpp — Chạy tự động 5 test case chính
