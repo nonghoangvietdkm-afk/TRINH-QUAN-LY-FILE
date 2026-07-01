@@ -7,7 +7,17 @@
 **Mini File Explorer** là một ứng dụng giả lập **hệ thống quản lý tập tin và thư mục** hoạt động trực tiếp trên **giao diện dòng lệnh (CLI)**.
 
 * **Bối cảnh bài toán:** Trong các hệ điều hành thực tế (như Windows, Linux), hệ thống file luôn được tổ chức theo **mô hình cây phân cấp**. Việc quản lý hàng triệu tập tin yêu cầu các thao tác như tìm kiếm, điều hướng và thêm/xóa phải diễn ra với **tốc độ tối ưu** và **tốn ít tài nguyên** nhất.
-* **Mục tiêu của ứng dụng:** Dự án này được viết ra nhằm tái hiện lại cách thức hoạt động của một hệ điều hành thu nhỏ. Điểm đặc biệt là ứng dụng **hoàn toàn tự xây dựng (tự code tay) các cấu trúc dữ liệu nền tảng** mà không dựa dẫm vào bất kỳ thư viện container có sẵn nào của C++ (như `std::vector`, `std::stack`, `std::queue`). Qua đó, giúp tối ưu hóa **hiệu năng xử lý** tại từng nút (Node) trong hệ thống.
+* **Mục tiêu của ứng dụng:**
+
+Tái hiện mô hình quản lý phân cấp thực tế: Áp dụng mô hình cấu trúc cây hệ thống tệp tin thu nhỏ (giống Windows hay Linux) nhằm xử lý trực quan mối quan hệ logic Cha - Con và quan hệ Đồng cấp (Anh - Em) giữa các đối tượng.
+
+Tối ưu hóa hiệu năng và dung lượng bộ nhớ: Tự tay thiết lập và làm chủ cơ chế quản lý bằng Cây tổng quát dạng Con đầu tiên - Anh em kế cận (Left Child - Right Sibling). Việc này giúp hệ thống linh hoạt mở rộng vô số thư mục con mà không bị lãng phí vùng nhớ cấp phát động như mảng thông thường.
+
+Vận dụng đồng bộ các CTDL bổ trợ: Phối hợp chặt chẽ việc sử dụng Hai ngăn xếp độc lập để giải quyết bài toán truy vết hành trình điều hướng cục bộ (tính năng Lùi/Tiến) và Hàng đợi để phân tầng dữ liệu.
+
+Làm chủ kỹ thuật Duyệt cây nâng cao: Thực chứng hiệu quả của các phương pháp duyệt cây kinh điển: Duyệt rộng (BFS) để tối ưu hóa thời gian tìm kiếm phần tử, Duyệt sau (Post-order) để tính toán tích lũy dung lượng, và Duyệt trước (Pre-order) nhằm phục vụ quá trình Đóng gói/Tuần tự hóa dữ liệu (Serialization) xuất nhập file phẳng.
+
+Xây dựng tư duy kiểm thử tự động (Unit Test): Thiết lập sẵn hệ thống tự động chạy kịch bản thử nghiệm gồm 5 bài test cốt lõi. Mục tiêu là chứng minh tính đúng đắn của toàn bộ logic chương trình một cách độc lập trước khi tích hợp vào giao diện điều khiển của người dùng.
 
 Cấu trúc dữ liệu sử dụng
 
