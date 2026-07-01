@@ -27,15 +27,6 @@ Post-order Traversal (Duyệt cây sau): Được sử dụng để tính toán 
 
 💾 I/O Serialization: Xuất toàn bộ cấu trúc cây thư mục hiện tại ra file .txt và tái tạo (đọc) lại nguyên vẹn cấu trúc cây khi khởi động lại ứng dụng.
 
-📂 Cấu Trúc Thư Mục Dự Án
-Plaintext
-mini-file-explorer/
-├── src/
-│   ├── main.cpp         # Menu điều khiển chính và vòng lặp tương tác người dùng (CLI)
-│   ├── structures.h     # Định nghĩa các Struct (Node, Stack, Queue) & mẫu hàm
-│   └── functions.cpp    # Cài đặt chi tiết các hàm xử lý logic hệ thống
-└── tests/
-    └── test.cpp         # File chạy kiểm thử tự động (Automation Test Suite)
 🧪 Hệ Thống Kiểm Thử Tự Động (5 Test Cases)
 Ứng dụng tích hợp sẵn script kiểm thử tự động trong tests/test.cpp nhằm xác thực độ ổn định và tính chính xác của các cấu trúc dữ liệu:
 
@@ -57,5 +48,4 @@ Kiểm tra tính năng bằng cách xuất cấu trúc cây ra file test_tree.tx
 🚀 Hướng Dẫn Biên Dịch Và Chạy Ứng Dụng
 Đảm bảo máy tính của bạn đã cài đặt trình biên dịch hỗ trợ chuẩn C++17 trở lên (ví dụ: GCC 7.0+, Clang 5.0+, MSVC 2017+).
 
-1. Chạy ứng dụng chính (Chế độ tương tác CLI)
-Biên dịch các file mã nguồn trong thư mục src và khởi chạy chương trình:
+
