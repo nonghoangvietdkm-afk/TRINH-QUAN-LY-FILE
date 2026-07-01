@@ -16,6 +16,7 @@ Cây tổng quát: Lưu quan hệ cha - con giữa các thư mục và tệp tin
 Hai ngăn xếp: Dùng để lưu lịch sử nhằm thực hiện tính năng Lùi (Back) và Tiến (Forward) thư mục.  
 
 Một hàng đợi: Phục vụ riêng cho tính năng Tìm kiếm.
+
 ---
 
 ## 🛠️ 2. Phân Tích Logic Cấu Trúc Dữ Liệu & Thuật Toán
