@@ -12,6 +12,13 @@
 ---
 
 ## 🛠️ 2. Phân Tích Logic Cấu Trúc Dữ Liệu & Thuật Toán
+ Các thuật toán áp dụng
+ 
+ Tìm kiếm theo chiều rộng: Quét qua từng tầng thư mục để tìm đúng tệp tin theo tên. 
+ 
+ Duyệt sau (Post-order): Đi xuống tính dung lượng các tệp con trước, rồi cộng dồn ngược lên thư mục cha.  
+ 
+ Duyệt trước (Pre-order): Xuất toàn bộ cấu trúc cây ra tệp văn bản và đọc ngược lại để khôi phục dữ liệu
 
 Sự thành công của ứng dụng đến từ việc đặt đúng **cấu trúc dữ liệu** vào đúng bài toán cần giải quyết. Mối quan hệ logic giữa các thành phần được thiết kế như sau:
 
