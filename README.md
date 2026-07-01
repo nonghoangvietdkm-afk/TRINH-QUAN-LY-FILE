@@ -1,51 +1,56 @@
-📁 Mini File Explorer (CLI)
-Mini File Explorer là một ứng dụng giao diện dòng lệnh (CLI) mô phỏng trực quan hệ thống quản lý tập tin và thư mục dưới dạng cây phân cấp. Dự án được xây dựng dựa trên sự kết hợp tối ưu của các cấu trúc dữ liệu cốt lõi nhằm giải quyết triệt để các bài toán thực tế như quản lý lịch sử, tìm kiếm tối ưu và tuần tự hóa dữ liệu (Serialization).
+# 📁 Giới Thiệu Dự Án: TRÌNH QUẢN LÝ FILE
 
-🛠️ Kiến Trúc Cấu Trúc Dữ Liệu & Thuật Toán
-Ứng dụng hoàn toàn không sử dụng các thư viện container có sẵn (như std::vector, std::stack, std::queue) mà tự hiện thực các cấu trúc dữ liệu (CTDL) để tối ưu hóa hiệu năng và bộ nhớ:
+---
 
-Tree (N-ary Tree): Mô phỏng toàn bộ hệ thống file/thư mục phân cấp. Mỗi thư mục đóng vai trò là một nút (Node) có thể chứa nhiều thư mục con và tập tin khác nhau.
+## 1. 🎯 Tổng Quan Dự Án & Mục Tiêu Thiết Kế
 
-Linked List (firstChild & nextSibling): Thay vì dùng mảng, danh sách các file/folder con bên trong một thư mục cha được quản lý bằng cơ chế Danh sách liên kết. Mô hình này giúp tối ưu hóa việc thêm/xóa phần tử với độ phức tạp O(1) sau khi tìm thấy vị trí, hoàn toàn không tốn chi phí dịch chuyển vùng nhớ như mảng tĩnh hay mảng động.
+**Mini File Explorer** là một ứng dụng giả lập **hệ thống quản lý tập tin và thư mục** hoạt động trực tiếp trên **giao diện dòng lệnh (CLI)**.
 
-Stack (Cơ chế LIFO): Quản lý tính năng lịch sử điều hướng (Back/Forward). Khi người dùng thay đổi thư mục, trạng thái cũ được đẩy vào Stack, cho phép quay lại đúng thư mục vừa truy cập một cách chính xác.
+* **Bối cảnh bài toán:** Trong các hệ điều hành thực tế (như Windows, Linux), hệ thống file luôn được tổ chức theo **mô hình cây phân cấp**. Việc quản lý hàng triệu tập tin yêu cầu các thao tác như tìm kiếm, điều hướng và thêm/xóa phải diễn ra với **tốc độ tối ưu** và **tốn ít tài nguyên** nhất.
+* **Mục tiêu của ứng dụng:** Dự án này được viết ra nhằm tái hiện lại cách thức hoạt động của một hệ điều hành thu nhỏ. Điểm đặc biệt là ứng dụng **hoàn toàn tự xây dựng (tự code tay) các cấu trúc dữ liệu nền tảng** mà không dựa dẫm vào bất kỳ thư viện container có sẵn nào của C++ (như `std::vector`, `std::stack`, `std::queue`). Qua đó, giúp tối ưu hóa **hiệu năng xử lý** tại từng nút (Node) trong hệ thống.
 
-Queue (Cơ chế FIFO): Triển khai thuật toán tìm kiếm BFS (Breadth-First Search). Hàng đợi giúp duyệt qua tất cả các thư mục cùng cấp trước khi đi sâu xuống các cấp tiếp theo, tối ưu hơn cho việc tìm kiếm các tập tin ở gần vị trí hiện tại.
+---
 
-Post-order Traversal (Duyệt cây sau): Được sử dụng để tính toán chính xác tổng dung lượng của một thư mục (Dung lượng thư mục cha = Tổng dung lượng các file nội tại + tổng dung lượng được tính đệ quy từ các thư mục con bên trong).
+## 🛠️ 2. Phân Tích Logic Cấu Trúc Dữ Liệu & Thuật Toán
 
-✨ Các Tính Năng Cốt Lõi
-🖥️ Trực quan hóa: Hiển thị cây thư mục dưới dạng đồ họa ASCII trực quan và sinh động (tương tự lệnh tree trên Linux/Windows).
+Sự thành công của ứng dụng đến từ việc đặt đúng **cấu trúc dữ liệu** vào đúng bài toán cần giải quyết. Mối quan hệ logic giữa các thành phần được thiết kế như sau:
 
-📁 Quản lý tệp tin: Tạo mới (mkdir, touch), xóa bỏ (rm), và đổi tên (rename) linh hoạt cho cả file và folder.
-
-🧭 Điều hướng hệ thống: Di chuyển và quản lý vị trí hiện tại (cd, ls, pwd) thông qua liên kết con trỏ parent.
-
-⏳ Lịch sử duyệt mục: Quay lại (Back) hoặc tiến tới (Forward) trong lịch sử di chuyển nhờ hệ thống Double-Stack.
-
-🔍 Tìm kiếm thông minh: Quét tìm tập tin ẩn sâu trong hệ thống bằng thuật toán duyệt theo chiều rộng BFS.
-
-💾 I/O Serialization: Xuất toàn bộ cấu trúc cây thư mục hiện tại ra file .txt và tái tạo (đọc) lại nguyên vẹn cấu trúc cây khi khởi động lại ứng dụng.
-
-🧪 Hệ Thống Kiểm Thử Tự Động (5 Test Cases)
-Ứng dụng tích hợp sẵn script kiểm thử tự động trong tests/test.cpp nhằm xác thực độ ổn định và tính chính xác của các cấu trúc dữ liệu:
-
-Test 1: Cấu trúc Linked List
-Tạo các thư mục (docs, images) và file (notes.txt), sau đó gọi lệnh ls để kiểm tra tính chính xác của cấu trúc Linked List trong thư mục hiện tại.
-
-Test 2: Con trỏ Parent & Điều hướng
-Di chuyển sâu vào cây thư mục bằng lệnh cd và in đường dẫn tuyệt đối bằng pwd để xác thực liên kết ngược lên nút cha.
-
-Test 3: Lịch sử Đôi (Double-Stack)
-Thực hiện chuỗi thao tác điều hướng phức tạp, kiểm tra trạng thái lịch sử khi gọi back() và forward().
-
-Test 4: BFS & Post-order Traversal
-Sử dụng thuật toán tìm kiếm BFS (Queue) để quét tìm một file nằm ẩn sâu, đồng thời tính tổng dung lượng thư mục bằng Post-order.
-
-Test 5: Serialization I/O
-Kiểm tra tính năng bằng cách xuất cấu trúc cây ra file test_tree.txt, giải phóng bộ nhớ cây cũ, sau đó nạp lại dữ liệu từ file để khôi phục nguyên vẹn cấu trúc ban đầu.
-
-🚀 Hướng Dẫn Biên Dịch Và Chạy Ứng Dụng
-Đảm bảo máy tính của bạn đã cài đặt trình biên dịch hỗ trợ chuẩn C++17 trở lên (ví dụ: GCC 7.0+, Clang 5.0+, MSVC 2017+).
+* 🌳 **Mô phỏng cây thư mục bằng Cây n-phân (N-ary Tree):** Vì một thư mục có thể chứa vô số thư mục con và file, cấu trúc **Cây** là lựa chọn duy nhất phản ánh chính xác tính chất phân cấp này. Mỗi **Node** trên cây sẽ đại diện cho một **File** hoặc một **Folder**.
+* 🔗 **Tối ưu hóa bộ nhớ bằng Danh sách liên kết (Linked List):** Thay vì dùng mảng co giãn (Vector) để lưu danh sách con bên trong thư mục, dự án sử dụng hai con trỏ cốt lõi là **`firstChild` (con đầu tiên)** và **`nextSibling` (anh em kế cận)**.
+* *Logic xử lý:* Khi bạn tạo thêm 1 file hoặc xóa 1 folder, hệ thống chỉ cần **thay đổi liên kết con trỏ** với chi phí cực thấp ($O(1)$), hoàn toàn **không tốn chi phí cấp phát lại bộ nhớ** hay dịch chuyển vùng nhớ như mảng tĩnh hay mảng động.
 
 
+* ⏳ **Quản lý lịch sử di chuyển bằng Ngăn xếp (Stack):** Tính năng Quay lại (**Back**) và Tiến về trước (**Forward**) hoạt động dựa trên cơ chế **LIFO (Vào sau - Ra trước)**.
+* *Logic xử lý:* Khi người dùng gõ `cd` để vào thư mục mới, thư mục cũ sẽ được "đẩy" vào **Stack Back**. Khi nhấn lệnh quay lại, hệ thống lấy ngay phần tử trên cùng ra. Thao tác này diễn ra **ngay lập tức** mà không cần duyệt lại từ đầu cây.
+
+
+* 🔍 **Tìm kiếm tập tin nhanh bằng Hàng đợi và Duyệt chiều rộng (Queue & BFS):** Khi người dùng cần tìm một file theo tên nhưng không nhớ rõ vị trí, thuật toán **BFS** sẽ quét qua tất cả các file/folder ở **cùng cấp độ hiện tại** trước khi đi sâu xuống các tầng thấp hơn.
+* *Logic xử lý:* Việc sử dụng **Queue (FIFO)** đảm bảo thứ tự tìm kiếm công bằng và giúp **tìm ra các file nằm ở gần vị trí hiện tại** của người dùng sớm nhất mà không bới sâu vào các nhánh xa lạ không liên quan.
+
+
+* 🧮 **Tính tổng dung lượng bằng Duyệt cây sau (Post-order Traversal):** Một thư mục không tự có dung lượng cố định, dung lượng của nó bằng **tổng dung lượng các file bên trong** cộng với **dung lượng của các thư mục con** thuộc về nó.
+* *Logic xử lý:* Thuật toán **duyệt sau (Trái -> Phải -> Gốc)** sẽ đi xuống tận cùng của các nhánh con, tính toán dung lượng của các tệp tin nhỏ nhất trước, sau đó **cộng dồn ngược lên trên** để đưa ra con số chính xác cho thư mục cha.
+
+
+
+---
+
+## 🗺️ 3. Bản Đồ Tính Năng & Kịch Bản Kiểm Thử (Test Cases)
+
+Hệ thống được chia làm hai chế độ vận hành rõ rệt nhằm đảm bảo **tính thực tiễn** và **khả năng kiểm thử tự động**.
+
+### 💻 3.1. Các nhóm tính năng tương tác người dùng
+
+* **Nhóm Quản trị hệ thống:** Tạo mới thư mục/file (`mkdir`, `touch`), xóa bỏ hoàn toàn một nhánh cây (`rm`), đổi tên phần tử (`rename`).
+* **Nhóm Điều hướng không gian:** Duyệt danh sách mục con (`ls`), chuyển đổi thư mục (`cd`), hiển thị đường dẫn tuyệt đối từ gốc (`pwd`). Đặc biệt là khả năng hiển thị toàn bộ cây dưới dạng **đồ họa ký tự ASCII trực quan** (giống lệnh `tree`).
+* **Nhóm Hệ thống (I/O Serialization):** Lưu cấu trúc cây thành file văn bản `.txt` và đọc ngược lại file đó để **tái dựng lại toàn bộ cây vào bộ nhớ RAM** khi khởi động lại ứng dụng.
+
+### 🧪 3.2. Logic vận hành của 5 Kịch bản Kiểm thử Tự động (Automation Test)
+
+Để chứng minh các cấu trúc dữ liệu tự viết hoạt động **chính xác 100%**, file `test.cpp` sẽ chạy tự động qua **5 bước logic** nghiêm ngặt:
+
+* 🔹 **Kịch bản 1 (Kiểm thử Linked List):** Hệ thống tự động tạo hàng loạt file và thư mục, sau đó gọi lệnh `ls` để xác thực xem các con trỏ `nextSibling` có **liên kết đúng thứ tự** và không làm sót phần tử nào.
+* 🔹 **Kịch bản 2 (Kiểm thử Con trỏ Ngược):** Cho hệ thống `cd` sâu qua nhiều tầng thư mục, sau đó gọi `pwd`. Nếu đường dẫn in ra chính xác, chứng tỏ **con trỏ `parent` ngược lên nút cha** hoạt động hoàn hảo.
+* 🔹 **Kịch bản 3 (Kiểm thử Double-Stack):** Thực hiện một chuỗi di chuyển liên tục: A -> B -> C -> D. Sau đó giả lập gọi `back()` 2 lần và `forward()` 1 lần, rồi đối chiếu vị trí hiện tại để kiểm tra **tính toàn vẹn của lịch sử**.
+* 🔹 **Kịch bản 4 (Kiểm thử BFS & Đệ quy):** Giấu một file tên là `secret.txt` ở một nhánh rất sâu. Chạy lệnh tìm kiếm để xem **Queue** có tìm ra đúng file đó không, đồng thời chạy hàm duyệt **Post-order** kiểm tra xem tổng dung lượng hiển thị có khớp với thực tế hay không.
+* 🔹 **Kịch bản 5 (Kiểm thử Đóng/Mở dữ liệu):** Xuất toàn bộ cây ra file `test_tree.txt`. Dùng hàm hủy (destructor) **giải phóng hoàn toàn vùng nhớ trên RAM**, sau đó nạp lại dữ liệu từ file để chứng minh hệ thống có thể **khôi phục nguyên vẹn 100%** cấu trúc ban đầu.
